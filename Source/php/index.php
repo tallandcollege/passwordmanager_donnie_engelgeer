@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password manager</title>
+    <title>PWmanager</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Password manager</h1>
+    <h1>PWmanager</h1>
 
     <form>
 
