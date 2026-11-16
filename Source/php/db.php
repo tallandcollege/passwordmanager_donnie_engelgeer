@@ -2,7 +2,7 @@
 $host = 'localhost';
 $dbname = 'pwmanager';
 $username = 'root';
-$password = ''; // Empty on XAMPP/WAMP, 'root' on MAMP
+$password = '';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);

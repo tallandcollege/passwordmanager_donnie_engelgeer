@@ -64,11 +64,6 @@
 
         <button type="submit">Opslaan</button>
     </form>
-
-    <h1>--------------------------------------------</h1>
-
-    
-
 </body>
 
 </html>
