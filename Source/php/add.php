@@ -61,6 +61,7 @@
             </select>
         </div>
 
+        <input type="hidden" name="action" value="save">
 
         <button type="submit">Opslaan</button>
     </form>
