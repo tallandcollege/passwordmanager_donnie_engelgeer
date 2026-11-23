@@ -35,7 +35,12 @@
                     <?php foreach ($item as $column => $value): ?>
                         <div class="info-row">
                             <span class="label"><strong><?php echo "$column" ?>: </strong></span>
-                            <span class="value"><?php echo "$value" ?></span>
+                            <span class="value"><?php echo "$value </span>";
+                            if ($column == 'Verversingsfrequentie')
+                                { echo ' dagen'; }
+                            else if ($column == 'Wachtwoord')
+                                { echo ' <button onclick="showPassword()">Show/Hide</button> <button onclick="copyPassword(this)">Copy</button> '; }
+                            ?>
                         </div>
 
                     <?php endforeach; ?>
@@ -58,3 +63,30 @@
         <?php endif; ?>
     </div>
 </body>
+
+<script>
+    function copyPassword(btn) {
+        var copyText = btn.closest('.info-row').querySelector('.value').textContent.trim();
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(copyText).then(function() {
+                btn.textContent = "Copied!";
+                setTimeout(() => btn.textContent = "Copy", 1500);
+            });
+        } else {
+            // Fallback for plain HTTP (e.g., local IP or custom local domain)
+            var textArea = document.createElement("textarea");
+            textArea.value = copyText;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+
+            btn.textContent = "Copied!";
+            setTimeout(() => btn.textContent = "Copy", 1500);
+        }
+    }
+</script>
+
