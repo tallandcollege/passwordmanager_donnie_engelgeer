@@ -30,17 +30,21 @@
         <?php if (!empty($items)): ?>
 
             <strong>-------------------------</strong>
-            <?php foreach ($items as $item): ?>
+            <?php foreach ($items as $item):?>
                 <div class="item-box">
                     <?php foreach ($item as $column => $value): ?>
                         <div class="info-row">
-                            <span class="label"><strong><?php echo "$column" ?>: </strong></span>
-                            <span class="value"><?php echo "$value </span>";
-                            if ($column == 'Verversingsfrequentie')
-                                { echo ' dagen'; }
-                            else if ($column == 'Wachtwoord')
-                                { echo ' <button onclick="showPassword()">Show/Hide</button> <button onclick="copyPassword(this)">Copy</button> '; }
-                            ?>
+                            <span class="label"><strong><?php echo htmlspecialchars($column); ?>: </strong></span>
+                            <?php if ($column == 'Wachtwoord'): ?>
+                                <span class="value" data-password="<?php echo htmlspecialchars($value, ENT_QUOTES, 'UTF-8'); ?>">••••••••</span>
+                                <button type="button" onclick="showPassword(this)">Show</button>
+                                <button type="button" onclick="copyPassword(this)">Copy</button>
+                            <?php else: ?>
+                                <span class="value"><?php echo htmlspecialchars($value); ?></span>
+                                <?php if ($column == 'Verversingsfrequentie') {
+                                    echo ' dagen';
+                                } ?>
+                            <?php endif; ?>
                         </div>
 
                     <?php endforeach; ?>
@@ -65,8 +69,21 @@
 </body>
 
 <script>
+    function showPassword(btn) {
+        var valueSpan = btn.closest('.info-row').querySelector('.value');
+
+        if (valueSpan.textContent === '••••••••') {
+            valueSpan.textContent = valueSpan.dataset.password;
+            btn.textContent = 'Hide';
+        } else {
+            valueSpan.textContent = '••••••••';
+            btn.textContent = 'Show';
+        }
+    }
+
     function copyPassword(btn) {
-        var copyText = btn.closest('.info-row').querySelector('.value').textContent.trim();
+        var valueSpan = btn.closest('.info-row').querySelector('.value');
+        var copyText = valueSpan.dataset.password || valueSpan.textContent.trim();
         if (navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(copyText).then(function() {
                 btn.textContent = "Copied!";
@@ -89,4 +106,3 @@
         }
     }
 </script>
-
