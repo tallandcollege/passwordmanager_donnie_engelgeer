@@ -11,6 +11,9 @@
 <body>
     <?php require_once 'db.php'; ?>
     <h1>PWmanager</h1>
+    <form action="index.php" method="POST" style="display:inline;">
+        <button type="submit" name="home">Terug</button>
+    </form>
 
     <?php
     try {

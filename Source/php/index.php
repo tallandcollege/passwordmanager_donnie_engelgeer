@@ -12,6 +12,7 @@
     <?php require_once 'db.php'; ?>
     <h1>PWmanager</h1>
 
+
     <?php
     try {
 
@@ -30,7 +31,7 @@
         <?php if (!empty($items)): ?>
 
             <strong>-------------------------</strong>
-            <?php foreach ($items as $item):?>
+            <?php foreach ($items as $item): ?>
                 <div class="item-box">
                     <?php foreach ($item as $column => $value): ?>
                         <div class="info-row">
