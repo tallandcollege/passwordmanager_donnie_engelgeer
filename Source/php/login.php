@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute([$_POST['password'] ?? '']);
     $row = $stmt->fetch();
 
-    if ($row) {
+    if ($row == true) {
         $loginCheck = true;
     }
 }
@@ -35,9 +35,12 @@ if ($loginCheck) {
 <body>
     <h1>PWmanager</h1>
     <form action="login.php" method="POST">
-        <label for="password">Password:</label>
+        <label for="password">Wachtwoord:</label>
         <input type="password" id="password" name="password" required>
         <br>
+        <?php if (isset($_POST['password'])) {
+        echo '<span style="color: red;">Onjuist hoofdwachtwoord ingevoerd</span><br>';
+        } ?>
         <button type="submit">Login</button>
     </form>
 </body>

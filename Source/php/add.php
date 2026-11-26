@@ -9,7 +9,14 @@
 </head>
 
 <body>
-    <?php require_once 'db.php'; ?>
+    <?php
+    session_start();
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+    
+    require_once 'db.php'; ?>
     <h1>PWmanager</h1>
     <form action="index.php" method="POST" style="display:inline;">
         <button type="submit" name="home">Terug</button>

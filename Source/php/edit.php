@@ -9,13 +9,16 @@
 </head>
 
 <body>
-    <?php require_once 'db.php'; ?>
-    <h1>PWmanager</h1>
-    <form action="index.php" method="POST" style="display:inline;">
-        <button type="submit" name="home">Terug</button>
-    </form>
+    <?php 
+    require_once 'db.php';
 
-    <?php
+    session_start();
+    
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+
     try {
 
         $stmt = $pdo->prepare("SELECT * FROM wachtwoorditems WHERE Id = :id");
@@ -25,7 +28,10 @@
         die("Connection failed: " . $e->getMessage());
     }
     ?>
-
+    <h1>PWmanager</h1>
+    <form action="index.php" method="POST" style="display:inline;">
+        <button type="submit" name="home">Terug</button>
+    </form>
     <form action="save.php" method="POST">
 
         <div class="form-group">
